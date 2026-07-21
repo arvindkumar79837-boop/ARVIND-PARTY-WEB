@@ -6,7 +6,6 @@ import 'core/constants/auth_controller.dart';
 import 'core/services/api_service.dart';
 import 'core/services/role_permission_service.dart';
 import 'core/services/socket_service.dart';
-import 'core/network/admin_api.dart';
 import 'core/theme/web_theme.dart';
 import 'modules/auth/controllers/role_auth_controller.dart';
 import 'routes/app_pages.dart';
@@ -25,7 +24,7 @@ Future<void> main() async {
 
   Get.put<ApiService>(ApiService(), permanent: true);
   Get.put<RolePermissionService>(RolePermissionService(), permanent: true);
-  Get.put<AdminApi>(AdminApi(), permanent: true);
+
   Get.put<AuthController>(AuthController(), permanent: true);
   Get.put<RoleAuthController>(RoleAuthController(), permanent: true);
   Get.put<SocketService>(SocketService(), permanent: true);

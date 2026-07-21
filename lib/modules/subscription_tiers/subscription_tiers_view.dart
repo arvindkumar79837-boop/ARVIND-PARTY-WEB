@@ -197,7 +197,7 @@ class _SubscriptionTiersViewState extends State<SubscriptionTiersView> {
           decoration: BoxDecoration(
             color: const Color(0xFF1E1E2E),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: tierColor.withOpacity(0.3)),
+            border: Border.all(color: tierColor.withValues(alpha: 0.3)),
           ),
           child: Column(
             children: [
@@ -205,7 +205,7 @@ class _SubscriptionTiersViewState extends State<SubscriptionTiersView> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [tierColor, tierColor.withOpacity(0.5)]),
+                  gradient: LinearGradient(colors: [tierColor, tierColor.withValues(alpha: 0.5)]),
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                 ),
                 child: Row(
@@ -270,7 +270,7 @@ class _SubscriptionTiersViewState extends State<SubscriptionTiersView> {
                   itemBuilder: (ctx, i) {
                     final sub = _subscribers[i];
                     return ListTile(
-                      leading: CircleAvatar(backgroundColor: const Color(0xFFFF8906).withOpacity(0.2), child: Text((sub['userName'] ?? '?')[0].toUpperCase(), style: const TextStyle(color: Color(0xFFFF8906)))),
+                      leading: CircleAvatar(backgroundColor: const Color(0xFFFF8906).withValues(alpha: 0.2), child: Text((sub['userName'] ?? '?')[0].toUpperCase(), style: const TextStyle(color: Color(0xFFFF8906)))),
                       title: Text(sub['userName'] ?? 'Unknown', style: const TextStyle(color: Colors.white)),
                       subtitle: Text('${sub['tierName']} • Expires: ${sub['expiresAt']}', style: const TextStyle(color: Colors.white54, fontSize: 12)),
                     );
@@ -284,7 +284,7 @@ class _SubscriptionTiersViewState extends State<SubscriptionTiersView> {
   Widget _perkChip(String emoji, String label) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(color: Colors.white.withOpacity(0.05), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.05), borderRadius: BorderRadius.circular(8)),
       child: Text('$emoji $label', style: const TextStyle(color: Colors.white70, fontSize: 12)),
     );
   }
@@ -298,7 +298,7 @@ class _SubscriptionTiersViewState extends State<SubscriptionTiersView> {
         style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           labelText: label, labelStyle: const TextStyle(color: Colors.white54),
-          filled: true, fillColor: Colors.white.withOpacity(0.05),
+          filled: true, fillColor: Colors.white.withValues(alpha: 0.05),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
         ),
       ),

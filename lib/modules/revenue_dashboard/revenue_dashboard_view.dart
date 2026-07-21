@@ -114,7 +114,7 @@ class _RevenueDashboardViewState extends State<RevenueDashboardView> {
         decoration: BoxDecoration(
           color: const Color(0xFF1E1E2E),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color.withOpacity(0.2)),
+          border: Border.all(color: color.withValues(alpha: 0.2)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +123,7 @@ class _RevenueDashboardViewState extends State<RevenueDashboardView> {
             const SizedBox(height: 8),
             Text(value, style: TextStyle(color: color, fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
-            Text(label, style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 13)),
+            Text(label, style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 13)),
           ],
         ),
       ),
@@ -192,7 +192,7 @@ class _RevenueDashboardViewState extends State<RevenueDashboardView> {
                   dense: true,
                   leading: CircleAvatar(
                     radius: 14,
-                    backgroundColor: const Color(0xFFFF8906).withOpacity(0.2),
+                    backgroundColor: const Color(0xFFFF8906).withValues(alpha: 0.2),
                     child: Text('${i + 1}', style: const TextStyle(color: Color(0xFFFF8906), fontSize: 12, fontWeight: FontWeight.bold)),
                   ),
                   title: Text(user['name'] ?? 'Unknown', style: const TextStyle(color: Colors.white, fontSize: 13)),
@@ -216,7 +216,7 @@ class _RevenueDashboardViewState extends State<RevenueDashboardView> {
                   dense: true,
                   leading: CircleAvatar(
                     radius: 14,
-                    backgroundColor: const Color(0xFF4CAF50).withOpacity(0.2),
+                    backgroundColor: const Color(0xFF4CAF50).withValues(alpha: 0.2),
                     child: Text('${i + 1}', style: const TextStyle(color: Color(0xFF4CAF50), fontSize: 12, fontWeight: FontWeight.bold)),
                   ),
                   title: Text(host['name'] ?? 'Unknown', style: const TextStyle(color: Colors.white, fontSize: 13)),
@@ -233,7 +233,7 @@ class _RevenueDashboardViewState extends State<RevenueDashboardView> {
       decoration: BoxDecoration(
         color: const Color(0xFF1E1E2E),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.08)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

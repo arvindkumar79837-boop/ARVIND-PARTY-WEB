@@ -116,7 +116,7 @@ class _SystemSettingsViewState extends State<SystemSettingsView> {
       decoration: BoxDecoration(
         color: const Color(0xFF1E1E2E),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(0.08)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,7 +139,7 @@ class _SystemSettingsViewState extends State<SystemSettingsView> {
         decoration: InputDecoration(
           labelText: label, labelStyle: const TextStyle(color: Colors.white54),
           hintText: hint, hintStyle: const TextStyle(color: Colors.white24),
-          filled: true, fillColor: Colors.white.withOpacity(0.05),
+          filled: true, fillColor: Colors.white.withValues(alpha: 0.05),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFFFF8906))),
         ),

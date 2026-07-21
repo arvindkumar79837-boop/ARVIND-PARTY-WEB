@@ -104,7 +104,7 @@ class _MusicLibraryViewState extends State<MusicLibraryView> {
               ],
             ),
             const SizedBox(height: 8),
-            Text('Manage tracks for room music broadcast & karaoke', style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 13)),
+            Text('Manage tracks for room music broadcast & karaoke', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 13)),
             const SizedBox(height: 24),
             if (_isLoading)
               const Center(child: CircularProgressIndicator(color: Color(0xFFFF8906)))
@@ -137,7 +137,7 @@ class _MusicLibraryViewState extends State<MusicLibraryView> {
                         children: [
                           Container(
                             width: 44, height: 44,
-                            decoration: BoxDecoration(color: const Color(0xFFFF8906).withOpacity(0.15), borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(color: const Color(0xFFFF8906).withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
                             child: const Icon(Icons.music_note, color: Color(0xFFFF8906)),
                           ),
                           const SizedBox(width: 12),
@@ -154,7 +154,7 @@ class _MusicLibraryViewState extends State<MusicLibraryView> {
                           if (hasLyrics)
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                              decoration: BoxDecoration(color: const Color(0xFF4CAF50).withOpacity(0.15), borderRadius: BorderRadius.circular(8)),
+                              decoration: BoxDecoration(color: const Color(0xFF4CAF50).withValues(alpha: 0.15), borderRadius: BorderRadius.circular(8)),
                               child: const Text('LRC', style: TextStyle(color: Color(0xFF4CAF50), fontSize: 10, fontWeight: FontWeight.bold)),
                             ),
                           const SizedBox(width: 8),
@@ -182,7 +182,7 @@ class _MusicLibraryViewState extends State<MusicLibraryView> {
         style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           labelText: label, labelStyle: const TextStyle(color: Colors.white54),
-          filled: true, fillColor: Colors.white.withOpacity(0.05),
+          filled: true, fillColor: Colors.white.withValues(alpha: 0.05),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
         ),
       ),

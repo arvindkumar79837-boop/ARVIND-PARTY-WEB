@@ -56,10 +56,10 @@ class _RoomTopicsViewState extends State<RoomTopicsView> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(controller: nameCtrl, style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(labelText: 'Topic Name', labelStyle: const TextStyle(color: Colors.white54), filled: true, fillColor: Colors.white.withOpacity(0.05), border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none))),
+              decoration: InputDecoration(labelText: 'Topic Name', labelStyle: const TextStyle(color: Colors.white54), filled: true, fillColor: Colors.white.withValues(alpha: 0.05), border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none))),
             const SizedBox(height: 8),
             TextField(controller: iconCtrl, style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(labelText: 'Emoji Icon', labelStyle: const TextStyle(color: Colors.white54), filled: true, fillColor: Colors.white.withOpacity(0.05), border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none))),
+              decoration: InputDecoration(labelText: 'Emoji Icon', labelStyle: const TextStyle(color: Colors.white54), filled: true, fillColor: Colors.white.withValues(alpha: 0.05), border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none))),
           ],
         ),
         actions: [
@@ -112,7 +112,7 @@ class _RoomTopicsViewState extends State<RoomTopicsView> {
               ],
             ),
             const SizedBox(height: 8),
-            Text('Topics appear as filters in the app\'s room discovery', style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 13)),
+            Text('Topics appear as filters in the app\'s room discovery', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 13)),
             const SizedBox(height: 24),
             if (_isLoading)
               const Center(child: CircularProgressIndicator(color: Color(0xFFFF8906)))
@@ -126,9 +126,9 @@ class _RoomTopicsViewState extends State<RoomTopicsView> {
                     return Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
                       decoration: BoxDecoration(
-                        color: color.withOpacity(0.1),
+                        color: color.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: color.withOpacity(0.3)),
+                        border: Border.all(color: color.withValues(alpha: 0.3)),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -139,7 +139,7 @@ class _RoomTopicsViewState extends State<RoomTopicsView> {
                           const SizedBox(width: 10),
                           GestureDetector(
                             onTap: () => _deleteTopic(topic['name']),
-                            child: Icon(Icons.close, color: color.withOpacity(0.5), size: 18),
+                            child: Icon(Icons.close, color: color.withValues(alpha: 0.5), size: 18),
                           ),
                         ],
                       ),
