@@ -20,6 +20,9 @@ class RoleAuthController extends GetxController {
   static const String featureSecurityDashboard = 'SECURITY_DASHBOARD';
   static const String featureAuditLogs = 'AUDIT_LOGS';
 
+  // Convenience getter for owner check (used by admin_sidebar_widget and others)
+  bool get isOwner => currentUserRole.value == RoleType.ownerWeb;
+
   // Live permission observer — safe default: no permissions granted
   UserPermissions permissions = UserPermissions();
 

@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,8 +14,37 @@ import '../constants/env_config.dart';
 class ApiService extends GetxService {
   final _box = GetStorage();
   final String _baseUrl;
+  late final Dio _dio;
 
-  ApiService({String? baseUrl}) : _baseUrl = baseUrl ?? EnvConfig.apiBaseUrl;
+  /// Expose Dio instance for modules that need direct Dio access
+  /// (e.g. music_library, room_topics, feed_moderation, etc.)
+  Dio get dio => _dio;
+
+  ApiService({String? baseUrl}) : _baseUrl = baseUrl ?? EnvConfig.apiBaseUrl {
+    _dio = Dio(BaseOptions(
+      baseUrl: _baseUrl,
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
+      headers: {'Content-Type': 'application/json'},
+    ));
+    _dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        final t = token;
+        if (t != null) {
+          options.headers['Authorization'] = 'Bearer $t';
+        }
+        handler.next(options);
+      },
+      onError: (error, handler) {
+        if (error.response?.statusCode == 401) {
+          token = null;
+          try { Get.find<RolePermissionService>().logout(); } catch (e) { debugPrint('Logout cleanup error: $e'); }
+          Get.offAllNamed('/login');
+        }
+        handler.next(error);
+      },
+    ));
+  }
 
   String? get token => _box.read('admin_token');
   set token(String? value) {

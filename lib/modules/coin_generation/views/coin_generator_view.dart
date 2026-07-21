@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../auth/controllers/role_auth_controller.dart'; // अपने कंट्रोलर का सही पाथ दें
+import '../../auth/controllers/role_auth_controller.dart';
+import '../../auth/models/role_permission_model.dart';
 
 class CoinGeneratorView extends StatefulWidget {
   const CoinGeneratorView({super.key});
