@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../core/constants/auth_controller.dart';
 import '../../core/services/api_service.dart';
 import '../../core/theme/web_theme.dart';
 
@@ -64,7 +63,7 @@ class _AgencyTargetViewState extends State<AgencyTargetView> {
                 ),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
-                  value: selectedMetric,
+                  initialValue: selectedMetric,
                   decoration: const InputDecoration(labelText: 'Target Metric', border: OutlineInputBorder()),
                   items: const [
                     DropdownMenuItem<String>(value: 'COINS_SPENT', child: Text('Coins Spent')),
@@ -84,7 +83,7 @@ class _AgencyTargetViewState extends State<AgencyTargetView> {
                 ),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
-                  value: selectedDuration,
+                  initialValue: selectedDuration,
                   decoration: const InputDecoration(labelText: 'Duration', border: OutlineInputBorder()),
                   items: const [
                     DropdownMenuItem<String>(value: 'WEEKLY', child: Text('1 Week (7 days)')),

@@ -15,7 +15,6 @@ class _ContentReportsViewState extends State<ContentReportsView> {
   bool _isLoading = true;
   String _filterStatus = 'ALL';
   int _page = 1;
-  int _total = 0;
 
   @override
   void initState() {

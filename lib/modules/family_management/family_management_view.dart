@@ -4,7 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../core/services/api_service.dart';
 import '../../core/theme/web_theme.dart';
 import 'family_controller.dart';
 
@@ -17,10 +16,8 @@ class FamilyManagementView extends StatefulWidget {
 
 class _FamilyManagementViewState extends State<FamilyManagementView> {
   final FamilyController _controller = Get.put(FamilyController());
-  final _apiService = Get.find<ApiService>();
   final TextEditingController _searchController = TextEditingController();
   final int _currentPage = 1;
-  final int _limit = 20;
   bool _isLoading = false;
 
   @override

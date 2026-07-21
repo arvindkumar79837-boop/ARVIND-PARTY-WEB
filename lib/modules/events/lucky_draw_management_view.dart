@@ -166,7 +166,7 @@ class _LuckyDrawManagementViewState extends State<LuckyDrawManagementView> {
                               const SizedBox(width: 8),
                               Expanded(
                                 child: DropdownButtonFormField<String>(
-                                  value: seg['prize_type'],
+                                  initialValue: seg['prize_type'],
                                   decoration: const InputDecoration(labelText: 'Prize Type', border: OutlineInputBorder()),
                                   items: ['coins', 'diamonds', 'xp', 'frame', 'badge', 'rocket', 'vip_days', 'jackpot', 'entry_car', 'nothing']
                                       .map((t) => DropdownMenuItem(value: t, child: Text(t)))

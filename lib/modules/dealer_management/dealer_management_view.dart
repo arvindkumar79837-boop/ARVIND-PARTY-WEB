@@ -60,7 +60,7 @@ class _DealerManagementViewState extends State<DealerManagementView> {
               TextField(controller: uidController, decoration: const InputDecoration(labelText: 'User UID', border: OutlineInputBorder())),
               const SizedBox(height: 8),
               DropdownButtonFormField<String>(
-                value: levelController.text,
+                initialValue: levelController.text,
                 decoration: const InputDecoration(labelText: 'Level', border: OutlineInputBorder()),
                 items: const [
                   DropdownMenuItem(value: 'silver', child: Text('Silver')),
@@ -135,7 +135,7 @@ class _DealerManagementViewState extends State<DealerManagementView> {
       AlertDialog(
         title: Text('Update Level: $dealerUid'),
         content: DropdownButtonFormField<String>(
-          value: levelController.text,
+          initialValue: levelController.text,
           decoration: const InputDecoration(labelText: 'Level', border: OutlineInputBorder()),
           items: const [
             DropdownMenuItem(value: 'silver', child: Text('Silver')),

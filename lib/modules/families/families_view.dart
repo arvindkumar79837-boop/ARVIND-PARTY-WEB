@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/services/api_service.dart';
-import '../../core/constants/auth_controller.dart';
 import 'family_details_view.dart';
 
 class FamiliesView extends StatefulWidget {
@@ -17,7 +16,6 @@ class FamiliesView extends StatefulWidget {
 
 class _FamiliesViewState extends State<FamiliesView> {
   final _apiService = Get.find<ApiService>();
-  final _auth = Get.find<AuthController>();
 
   List<Map<String, dynamic>> _families = [];
   bool _isLoading = true;
@@ -62,41 +60,7 @@ class _FamiliesViewState extends State<FamiliesView> {
     setState(() => _isLoading = false);
   }
 
-  Future<void> _deleteFamily(String familyId, String familyName) async {
-    final confirm = await showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF252542),
-        title: const Text('Delete Family?', style: TextStyle(color: Colors.white)),
-        content: Text(
-          'Are you sure you want to delete "$familyName"? This action cannot be undone.',
-          style: const TextStyle(color: Colors.grey),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('Delete', style: TextStyle(color: Colors.red)),
-          ),
-        ],
-      ),
-    );
 
-    if (confirm != true) return;
-
-    try {
-      final response = await _apiService.delete('/families/admin/$familyId');
-      if (response['success'] == true) {
-        Get.snackbar('Success', 'Family deleted successfully');
-        _loadFamilies();
-      } else {
-        Get.snackbar('Error', response['message'] ?? 'Failed to delete');
-      }
-    } catch (e) { debugPrint('Error: $e'); Get.snackbar('Error', 'Failed to delete family'); }
-  }
 
   Future<void> _toggleBanFamily(Map<String, dynamic> family) async {
     final willActivate = !(family['is_active'] ?? false);

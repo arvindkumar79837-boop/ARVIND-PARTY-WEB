@@ -376,7 +376,7 @@ class _StaffListViewState extends State<StaffListView> {
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(labelText: 'Role'),
-                value: selectedRole,
+                initialValue: selectedRole,
                 items: _availableRoles.map((role) {
                   return DropdownMenuItem<String>(
                     value: role['role'],

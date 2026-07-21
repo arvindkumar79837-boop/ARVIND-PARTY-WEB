@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../core/constants/auth_controller.dart';
 import '../../core/services/api_service.dart';
 
 class CoinPricingView extends StatefulWidget {

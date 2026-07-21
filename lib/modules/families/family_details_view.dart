@@ -431,7 +431,6 @@ class _FamilyDetailsViewState extends State<FamilyDetailsView> {
     final isLeader = role == 'Patriarch';
     final avatarUrl = member['avatar'] ?? '';
     final username = member['username'] ?? 'Unknown';
-    final userLevel = member['level'] ?? 1;
 
     Color roleColor;
     String roleLabel;

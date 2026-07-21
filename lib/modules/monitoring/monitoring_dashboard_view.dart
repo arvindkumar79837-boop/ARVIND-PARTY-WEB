@@ -14,7 +14,6 @@ class _MonitoringDashboardViewState extends State<MonitoringDashboardView> {
   final ApiService _apiService = Get.put(ApiService());
   bool _isLoading = true;
   Map<String, dynamic>? _healthData;
-  Map<String, dynamic>? _metricsData;
   String? _error;
 
   @override

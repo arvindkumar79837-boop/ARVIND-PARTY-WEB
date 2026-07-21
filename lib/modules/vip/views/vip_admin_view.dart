@@ -348,7 +348,7 @@ class _VipAdminViewState extends State<VipAdminView> with SingleTickerProviderSt
             ),
             const SizedBox(height: 8),
             DropdownButtonFormField<int>(
-              value: selectedLevel,
+              initialValue: selectedLevel,
               items: const [1, 2, 3, 4, 5].map((l) => DropdownMenuItem(value: l, child: Text('SVIP $l'))).toList(),
               onChanged: (v) => selectedLevel = v ?? 1,
               decoration: const InputDecoration(labelText: 'SVIP Level', labelStyle: TextStyle(color: Colors.grey), border: OutlineInputBorder()),

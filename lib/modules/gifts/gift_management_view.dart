@@ -370,7 +370,7 @@ class _GiftManagementViewState extends State<GiftManagementView> {
     String selectedCategory = 'BASIC';
     bool isLucky = false;
     bool isTreasure = false;
-    bool comboEnabled = false;
+
     bool isLimitedEdition = false;
     final treasurePoolController = TextEditingController(text: '1000');
     final treasureDurationController = TextEditingController(text: '30');
@@ -398,14 +398,14 @@ class _GiftManagementViewState extends State<GiftManagementView> {
                   const SizedBox(height: 8),
                   Row(children: [
                     Expanded(child: DropdownButtonFormField<String>(
-                      value: selectedType,
+                      initialValue: selectedType,
                       decoration: const InputDecoration(labelText: 'Gift Type', border: OutlineInputBorder()),
                       items: 'STATIC,ANIMATED,SVGA,3D,LUCKY,TREASURE,VEHICLE,CASTLE,FRAME,AVATAR,FESTIVAL,COMBO'.split(',').map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
                       onChanged: (v) => setDialogState(() => selectedType = v ?? 'STATIC'),
                     )),
                     const SizedBox(width: 8),
                     Expanded(child: DropdownButtonFormField<String>(
-                      value: selectedCategory,
+                      initialValue: selectedCategory,
                       decoration: const InputDecoration(labelText: 'Category', border: OutlineInputBorder()),
                       items: 'HOT,BASIC,PREMIUM,LUXURY,VIP,LUCKY,FESTIVAL'.split(',').map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
                       onChanged: (v) => setDialogState(() => selectedCategory = v ?? 'BASIC'),
@@ -522,7 +522,7 @@ class _GiftManagementViewState extends State<GiftManagementView> {
               const SizedBox(height: 8),
               Row(children: [
                 Expanded(child: DropdownButtonFormField<String>(
-                  value: selectedType,
+                  initialValue: selectedType,
                   decoration: const InputDecoration(labelText: 'Type', border: OutlineInputBorder()),
                   items: 'STATIC,ANIMATED,SVGA,3D,LUCKY,TREASURE,VEHICLE,CASTLE,FRAME,AVATAR,FESTIVAL,COMBO'.split(',').map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
                   onChanged: (v) => selectedType = v ?? 'STATIC',
@@ -564,7 +564,7 @@ class _GiftManagementViewState extends State<GiftManagementView> {
 
   void _showLeaderboardDialog(BuildContext context) {
     fetchLeaderboard();
-    String selectedType = 'sender';
+
 
     Get.dialog(
       AlertDialog(

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../core/constants/auth_controller.dart';
 import '../../core/services/api_service.dart';
 import '../../core/theme/web_theme.dart';
 
@@ -14,7 +13,6 @@ class LocalizationManagementView extends StatefulWidget {
 
 class _LocalizationManagementViewState extends State<LocalizationManagementView> {
   final ApiService _apiService = Get.find<ApiService>();
-  final AuthController _authController = Get.find<AuthController>();
   final TextEditingController _searchController = TextEditingController();
 
   List<dynamic> _localizationStrings = [];

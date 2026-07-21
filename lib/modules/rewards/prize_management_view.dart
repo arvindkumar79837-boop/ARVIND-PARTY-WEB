@@ -331,7 +331,7 @@ class _PrizeManagementViewState extends State<PrizeManagementView> {
                       ),
                       const SizedBox(height: 12),
                       DropdownButtonFormField<String>(
-                        value: _selectedItemType,
+                        initialValue: _selectedItemType,
                         decoration: const InputDecoration(
                           labelText: 'Prize Type',
                           border: OutlineInputBorder(),
@@ -367,7 +367,7 @@ class _PrizeManagementViewState extends State<PrizeManagementView> {
                       ),
                       const SizedBox(height: 12),
                       DropdownButtonFormField<String>(
-                        value: _selectedTier,
+                        initialValue: _selectedTier,
                         decoration: const InputDecoration(
                           labelText: 'Rarity Tier',
                           border: OutlineInputBorder(),

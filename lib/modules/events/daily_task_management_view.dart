@@ -140,7 +140,7 @@ class _DailyTaskManagementViewState extends State<DailyTaskManagementView> {
                     TextField(controller: _descController, decoration: const InputDecoration(labelText: 'Description', border: OutlineInputBorder()), maxLines: 2),
                     const SizedBox(height: 8),
                     DropdownButtonFormField<String>(
-                      value: _selectedType,
+                      initialValue: _selectedType,
                       decoration: const InputDecoration(labelText: 'Task Type', border: OutlineInputBorder()),
                       items: _taskTypes.map((t) => DropdownMenuItem(value: t['value'], child: Text(t['label']!))).toList(),
                       onChanged: (v) => setState(() => _selectedType = v ?? 'LOGIN'),

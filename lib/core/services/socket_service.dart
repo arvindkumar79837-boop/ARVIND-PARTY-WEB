@@ -25,16 +25,16 @@ class SocketService extends GetxService {
 
     _socket = io.io(
       EnvConfig.socketUrl,
-      io.OptionBuilder()
-          .setTransports(['websocket'])
-          .setAuth({
-            if (token.isNotEmpty) 'token': token,
-          })
-          .setReconnection(true)
-          .setReconnectionDelay(5000)
-          .setReconnectionAttempts(10)
-          .disableAutoConnect()
-          .build(),
+      <String, dynamic>{
+        'transports': ['websocket'],
+        'auth': <String, dynamic>{
+          if (token.isNotEmpty) 'token': token,
+        },
+        'autoConnect': false,
+        'reconnection': true,
+        'reconnectionDelay': 5000,
+        'reconnectionAttempts': 10,
+      },
     );
 
     _socket.onConnect((_) {

@@ -132,7 +132,7 @@ class _BroadcastViewState extends State<BroadcastView> {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
-                value: _selectedType,
+                initialValue: _selectedType,
                 decoration: const InputDecoration(labelText: 'Type', border: OutlineInputBorder()),
                 items: const [
                   DropdownMenuItem(value: 'ANNOUNCEMENT', child: Text('Announcement')),

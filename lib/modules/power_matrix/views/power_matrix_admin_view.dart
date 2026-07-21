@@ -263,7 +263,7 @@ class PowerMatrixAdminView extends GetView<PowerMatrixController> {
                 Expanded(
                   child: Obx(
                     () => DropdownButtonFormField<String>(
-                      value: controller.checkAction.value,
+                      initialValue: controller.checkAction.value,
                       isExpanded: true,
                       decoration: const InputDecoration(
                         labelText: 'Action',
