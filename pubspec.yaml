@@ -1,0 +1,143 @@
+name: arvind_party_web
+description: Arvind Party - Ultra Luxury Social Streaming Platform Admin & Owner Panel (Flutter Web)
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+
+  # ========== STATE MANAGEMENT ==========
+  get: ^4.7.3
+  get_storage: ^2.1.1
+
+  # ========== NETWORKING & HTTP ==========
+  http: ^1.6.0
+  dio: ^5.9.2
+  socket_io_client: ^3.1.5
+
+  # ========== AUTHENTICATION & SECURITY ==========
+  firebase_core: ^4.10.0
+  firebase_auth: ^6.5.2
+  google_sign_in: ^6.2.2
+
+  # ========== UI & DESIGN ==========
+  google_fonts: ^6.3.3
+  flutter_svg: ^2.3.0
+  cached_network_image: ^3.4.1
+  smooth_page_indicator: ^2.0.1
+
+  # ========== TABLES & DATA DISPLAY ==========
+  data_table_2: ^2.7.2
+  syncfusion_flutter_datagrid: ^33.2.12
+
+  # ========== FORMS & INPUT ==========
+  flutter_form_builder: ^10.3.0+2
+  form_builder_validators: ^11.3.0
+  intl_phone_number_input: ^0.7.5
+  image_picker: ^1.2.2
+
+  # ========== CHARTS & ANALYTICS ==========
+  syncfusion_flutter_charts: ^33.2.12
+  fl_chart: ^1.2.0
+
+  # ========== DATE & TIME ==========
+  intl: ^0.20.2
+  table_calendar: ^3.2.0
+
+  # ========== PDF & EXPORT ==========
+  pdf: ^3.12.0
+  printing: ^5.14.3
+  excel: ^4.0.6
+  csv: ^6.0.0
+
+  # ========== UTILITIES ==========
+  uuid: ^4.5.3
+  logger: ^2.7.0
+  connectivity_plus: ^7.1.1
+  device_info_plus: ^12.4.0
+  package_info_plus: ^9.0.1
+
+  # ========== VALIDATION & FORMATTING ==========
+  validators: ^3.0.0
+  mask_text_input_formatter: ^2.9.0
+
+  # ========== NOTIFICATION & ALERT ==========
+  fluttertoast: ^8.2.14
+  another_flushbar: ^2.2.4
+  top_snackbar_flutter: ^3.3.0
+
+  # ========== DEBOUNCING & STATE ==========
+  rxdart: ^0.28.0
+  stream_transform: ^2.1.1
+
+  # ========== STORAGE & PERSISTENCE ==========
+  # (get_storage used for session persistence)
+
+  # ========== LIVE STREAMING ==========
+  livekit_client: ^2.7.0
+
+  # ========== RESPONSIVE DESIGN ==========
+  responsive_framework: ^1.5.1
+  responsive_grid: ^2.4.4
+
+  # ========== ANIMATIONS ==========
+  flutter_animate: ^4.5.2
+  lottie: ^3.3.0
+
+  # ========== CLIPBOARD & SHARE ==========
+  share_plus: ^12.0.2
+  clipboard: ^3.0.14
+
+  # ========== MONITORING & ANALYTICS ==========
+  sentry_flutter: ^8.14.2
+  firebase_analytics: ^12.4.2
+
+  # ========== WEB SPECIFIC ==========
+  url_launcher: ^6.3.2
+  js: ^0.6.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+  # ========== CODE GENERATION & BUILD ==========
+  build_runner: ^2.4.13
+  get_cli: ^1.9.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    # - assets/images/    # Create directory and add images before uncommenting
+    # - assets/icons/     # Create directory and add icons before uncommenting
+    # - assets/animations/ # Create directory and add animations before uncommenting
+    - assets/fonts/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
+          weight: 800
+
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
