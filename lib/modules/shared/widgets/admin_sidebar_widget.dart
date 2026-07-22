@@ -254,14 +254,14 @@ class AdminSidebarWidget extends StatelessWidget {
                     icon: Icons.person,
                     title: "My Profile",
                     show: true,
-                    onTap: () => Get.toNamed('/my-profile'),
+                    onTap: () => Get.toNamed(AppRoutes.myProfile),
                   ),
 
                   _buildMenuItem(
                     icon: Icons.lock,
                     title: "Password Settings",
                     show: !authController.permissions.isPasswordLocked.value,
-                    onTap: () => Get.toNamed('/settings'),
+                    onTap: () => Get.toNamed(AppRoutes.settings),
                   ),
                 ],
               ),

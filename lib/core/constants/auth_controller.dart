@@ -7,6 +7,7 @@ import '../services/api_service.dart';
 import '../services/role_permission_service.dart';
 import '../../modules/auth/controllers/role_auth_controller.dart';
 import '../../modules/auth/models/role_permission_model.dart';
+import '../../routes/app_routes.dart';
 
 class AuthController extends GetxController {
   static AuthController get to => Get.find<AuthController>();
@@ -259,6 +260,6 @@ class AuthController extends GetxController {
       await fb.FirebaseAuth.instance.signOut();
     } catch (e) { debugPrint('Logout cleanup error: $e'); }
 
-    Get.offAllNamed('/login');
+    Get.offAllNamed(AppRoutes.login);
   }
 }

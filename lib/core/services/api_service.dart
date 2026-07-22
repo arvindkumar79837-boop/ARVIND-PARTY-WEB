@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'role_permission_service.dart';
 import '../constants/env_config.dart';
+import '../../routes/app_routes.dart';
 
 class ApiService extends GetxService {
   final _box = GetStorage();
@@ -39,7 +40,7 @@ class ApiService extends GetxService {
         if (error.response?.statusCode == 401) {
           token = null;
           try { Get.find<RolePermissionService>().logout(); } catch (e) { debugPrint('Logout cleanup error: $e'); }
-          Get.offAllNamed('/login');
+          Get.offAllNamed(AppRoutes.login);
         }
         handler.next(error);
       },
@@ -70,46 +71,71 @@ class ApiService extends GetxService {
   }
 
   Future<Map<String, dynamic>> get(String endpoint, {Map<String, dynamic>? queryParams, Map<String, dynamic>? query}) async {
-    final params = queryParams ?? query;
-    final uri = Uri.parse('$_baseUrl$endpoint').replace(queryParameters: params);
-    final response = await http.get(uri, headers: _headers).timeout(const Duration(seconds: 30));
-    _checkAuth(response);
-    return _parseResponse(response);
+    try {
+      final params = queryParams ?? query;
+      final uri = Uri.parse('$_baseUrl$endpoint').replace(queryParameters: params);
+      final response = await http.get(uri, headers: _headers).timeout(const Duration(seconds: 30));
+      _checkAuth(response);
+      return _parseResponse(response);
+    } catch (e) {
+      debugPrint('ApiService.get error: $e');
+      return {'success': false, 'message': 'Network error: $e'};
+    }
   }
 
   Future<Map<String, dynamic>> post(String endpoint, Map<String, dynamic> body) async {
-    final uri = Uri.parse('$_baseUrl$endpoint');
-    final response = await http.post(uri, headers: _headers, body: jsonEncode(body)).timeout(const Duration(seconds: 30));
-    _checkAuth(response);
-    return _parseResponse(response);
+    try {
+      final uri = Uri.parse('$_baseUrl$endpoint');
+      final response = await http.post(uri, headers: _headers, body: jsonEncode(body)).timeout(const Duration(seconds: 30));
+      _checkAuth(response);
+      return _parseResponse(response);
+    } catch (e) {
+      debugPrint('ApiService.post error: $e');
+      return {'success': false, 'message': 'Network error: $e'};
+    }
   }
 
   Future<Map<String, dynamic>> put(String endpoint, [Map<String, dynamic>? body]) async {
-    final uri = Uri.parse('$_baseUrl$endpoint');
-    final response = await http.put(uri, headers: _headers, body: jsonEncode(body ?? {})).timeout(const Duration(seconds: 30));
-    _checkAuth(response);
-    return _parseResponse(response);
+    try {
+      final uri = Uri.parse('$_baseUrl$endpoint');
+      final response = await http.put(uri, headers: _headers, body: jsonEncode(body ?? {})).timeout(const Duration(seconds: 30));
+      _checkAuth(response);
+      return _parseResponse(response);
+    } catch (e) {
+      debugPrint('ApiService.put error: $e');
+      return {'success': false, 'message': 'Network error: $e'};
+    }
   }
 
   Future<Map<String, dynamic>> patch(String endpoint, [Map<String, dynamic>? body]) async {
-    final uri = Uri.parse('$_baseUrl$endpoint');
-    final response = await http.patch(uri, headers: _headers, body: jsonEncode(body ?? {})).timeout(const Duration(seconds: 30));
-    _checkAuth(response);
-    return _parseResponse(response);
+    try {
+      final uri = Uri.parse('$_baseUrl$endpoint');
+      final response = await http.patch(uri, headers: _headers, body: jsonEncode(body ?? {})).timeout(const Duration(seconds: 30));
+      _checkAuth(response);
+      return _parseResponse(response);
+    } catch (e) {
+      debugPrint('ApiService.patch error: $e');
+      return {'success': false, 'message': 'Network error: $e'};
+    }
   }
 
   Future<Map<String, dynamic>> delete(String endpoint) async {
-    final uri = Uri.parse('$_baseUrl$endpoint');
-    final response = await http.delete(uri, headers: _headers).timeout(const Duration(seconds: 30));
-    _checkAuth(response);
-    return _parseResponse(response);
+    try {
+      final uri = Uri.parse('$_baseUrl$endpoint');
+      final response = await http.delete(uri, headers: _headers).timeout(const Duration(seconds: 30));
+      _checkAuth(response);
+      return _parseResponse(response);
+    } catch (e) {
+      debugPrint('ApiService.delete error: $e');
+      return {'success': false, 'message': 'Network error: $e'};
+    }
   }
 
   void _checkAuth(http.Response response) {
     if (response.statusCode == 401) {
       token = null;
       Get.find<RolePermissionService>().logout();
-      Get.offAllNamed('/login');
+      Get.offAllNamed(AppRoutes.login);
     }
   }
 }

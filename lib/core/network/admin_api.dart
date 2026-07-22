@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../constants/env_config.dart';
 import '../constants/auth_controller.dart';
+import '../../routes/app_routes.dart';
 
 class AdminApi extends GetxService {
   late final Dio _dio;
@@ -35,7 +36,7 @@ class AdminApi extends GetxService {
           } catch (e) {
             debugPrint('Error: $e');
             _box.remove('admin_token');
-            Get.offAllNamed('/login');
+            Get.offAllNamed(AppRoutes.login);
           }
         }
         return handler.next(error);
