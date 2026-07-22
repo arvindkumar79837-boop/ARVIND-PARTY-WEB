@@ -134,4 +134,10 @@ class AppRoutes {
   static const String roomTopics = '/room-topics';
   static const String feedModeration = '/feed-moderation';
   static const String revenueDashboard = '/revenue-dashboard';
+
+  // Power Matrix (Owner room hierarchy engine)
+  static const String powerMatrix = '/power-matrix';
+
+  // YouTube Management (Room playlist sync)
+  static const String youtubeManagement = '/youtube-management';
 }

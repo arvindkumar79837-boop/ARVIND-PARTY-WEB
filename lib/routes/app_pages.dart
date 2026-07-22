@@ -52,6 +52,10 @@ import '../modules/music_library/music_library_view.dart';
 import '../modules/room_topics/room_topics_view.dart';
 import '../modules/feed_moderation/feed_moderation_view.dart';
 import '../modules/revenue_dashboard/revenue_dashboard_view.dart';
+import '../modules/power_matrix/views/power_matrix_admin_view.dart';
+import '../modules/power_matrix/bindings/power_matrix_binding.dart';
+import '../modules/rooms/youtube_management_view.dart';
+import '../modules/rooms/bindings/youtube_management_binding.dart';
 import 'app_routes.dart';
 import 'auth_guard.dart';
 
@@ -519,6 +523,18 @@ class AppPages {
     GetPage(
       name: AppRoutes.revenueDashboard,
       page: () => const RevenueDashboardView(),
+      middlewares: [AuthGuard()],
+    ),
+    GetPage(
+      name: AppRoutes.powerMatrix,
+      page: () => const PowerMatrixAdminView(),
+      binding: PowerMatrixBinding(),
+      middlewares: [AuthGuard()],
+    ),
+    GetPage(
+      name: AppRoutes.youtubeManagement,
+      page: () => const YouTubeManagementView(),
+      binding: YouTubeManagementBinding(),
       middlewares: [AuthGuard()],
     ),
     // ── Not-found fallback ───────────────────────────────────────
