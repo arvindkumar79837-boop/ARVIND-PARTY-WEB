@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:arvind_party_web/modules/shared/admin_shell.dart';
 import 'package:arvind_party_web/core/services/api_service.dart';
-import 'package:arvind_party_web/core/constants/auth_controller.dart';
 
 class SubscriptionTiersView extends StatefulWidget {
   const SubscriptionTiersView({super.key});
@@ -13,7 +12,6 @@ class SubscriptionTiersView extends StatefulWidget {
 
 class _SubscriptionTiersViewState extends State<SubscriptionTiersView> {
   final _api = Get.find<ApiService>();
-  final _auth = Get.find<AuthController>();
   List<Map<String, dynamic>> _tiers = [];
   List<Map<String, dynamic>> _subscribers = [];
   bool _isLoading = true;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/services/api_service.dart';
-import '../../core/services/role_permission_service.dart';
 
 class WalletManagementView extends StatefulWidget {
   const WalletManagementView({super.key});
@@ -13,7 +12,6 @@ class WalletManagementView extends StatefulWidget {
 class _WalletManagementViewState extends State<WalletManagementView> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final ApiService _api = Get.find<ApiService>();
-  final RolePermissionService _role = Get.find<RolePermissionService>();
 
   var isLoading = false.obs;
   var totalCoins = 0.obs;
@@ -146,9 +144,11 @@ class _WalletManagementViewState extends State<WalletManagementView> with Single
       final response = await _api.get('/wallet/admin/withdrawals$query&page=$page&limit=50');
       if (response['success'] == true && response['data'] != null) {
         final data = response['data'];
-        withdrawals.value = reset
-            ? List<Map<String, dynamic>>.from(data)
-            : [...withdrawals.value, ...List<Map<String, dynamic>>.from(data)];
+        if (reset) {
+          withdrawals.assignAll(List<Map<String, dynamic>>.from(data));
+        } else {
+          withdrawals.addAll(List<Map<String, dynamic>>.from(data));
+        }
       }
     } catch (e) {
       debugPrint('Failed to load withdrawals: $e');
@@ -165,9 +165,11 @@ class _WalletManagementViewState extends State<WalletManagementView> with Single
       final response = await _api.get('/wallet/admin/transactions$query&page=$page&limit=50');
       if (response['success'] == true && response['data'] != null) {
         final data = response['data'];
-        allTransactions.value = reset
-            ? List<Map<String, dynamic>>.from(data)
-            : [...allTransactions.value, ...List<Map<String, dynamic>>.from(data)];
+        if (reset) {
+          allTransactions.assignAll(List<Map<String, dynamic>>.from(data));
+        } else {
+          allTransactions.addAll(List<Map<String, dynamic>>.from(data));
+        }
       }
     } catch (e) {
       debugPrint('Failed to load transactions: $e');
@@ -181,7 +183,7 @@ class _WalletManagementViewState extends State<WalletManagementView> with Single
       final response = await _api.get('/wallet/admin/wallet/tax-records?page=$page&limit=50');
       if (response['success'] == true && response['data'] != null) {
         final data = response['data'];
-        taxRecords.value = List<Map<String, dynamic>>.from(data['transactions'] ?? []);
+        taxRecords.assignAll(List<Map<String, dynamic>>.from(data['transactions'] ?? []));
         totalTaxCollected.value = data['totalTaxCollected'] ?? 0;
       }
     } catch (e) {
@@ -799,14 +801,16 @@ class _WalletManagementViewState extends State<WalletManagementView> with Single
 
         Obx(() {
           if (searchResults.isEmpty) return const SizedBox.shrink();
-          return Column(
-            children: searchResults.map((u) => RadioListTile<Map<String, dynamic>>(
-              title: Text('${u['name'] ?? 'N/A'} (${u['uid'] ?? ''})'),
-              subtitle: Text('Coins: ${u['coins'] ?? 0} | Diamonds: ${u['diamonds'] ?? 0}'),
-              value: u,
-              groupValue: selectedUser.value,
-              onChanged: (val) => selectedUser.value = val,
-            )).toList(),
+          return RadioGroup<Map<String, dynamic>>(
+            groupValue: selectedUser.value,
+            onChanged: (val) => selectedUser.value = val,
+            child: Column(
+              children: searchResults.map((u) => RadioListTile<Map<String, dynamic>>(
+                title: Text('${u['name'] ?? 'N/A'} (${u['uid'] ?? ''})'),
+                subtitle: Text('Coins: ${u['coins'] ?? 0} | Diamonds: ${u['diamonds'] ?? 0}'),
+                value: u,
+              )).toList(),
+            ),
           );
         }),
 

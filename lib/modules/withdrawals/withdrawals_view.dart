@@ -13,7 +13,7 @@ class _WithdrawalsViewState extends State<WithdrawalsView> {
   final _apiService = Get.find<ApiService>();
   List<Map<String, dynamic>> _withdrawals = [];
   bool _isLoading = true;
-  String _statusFilter = '';
+  final String _statusFilter = '';
 
   @override
   void initState() {

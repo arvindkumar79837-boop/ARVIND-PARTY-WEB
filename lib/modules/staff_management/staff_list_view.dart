@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/services/api_service.dart';
 import '../../core/services/role_permission_service.dart';
-import '../../core/constants/auth_controller.dart';
 
 class StaffListView extends StatefulWidget {
   const StaffListView({super.key});
@@ -21,7 +19,6 @@ class _StaffListViewState extends State<StaffListView> {
   List<String> _allPermissions = [];
   Map<String, dynamic> _roleHierarchy = {};
   bool _isLoading = true;
-  bool _isLoadingRoles = false;
 
   @override
   void initState() {
@@ -44,7 +41,6 @@ class _StaffListViewState extends State<StaffListView> {
   }
 
   Future<void> _loadRoles() async {
-    setState(() => _isLoadingRoles = true);
     try {
       final response = await _apiService.get('/staff/roles');
       if (response['success'] == true) {
@@ -55,7 +51,6 @@ class _StaffListViewState extends State<StaffListView> {
     } catch (e) {
       debugPrint('Error loading roles: $e');
     }
-    setState(() => _isLoadingRoles = false);
   }
 
   Future<void> _toggleActive(String staffId, bool currentStatus) async {
@@ -360,7 +355,6 @@ class _StaffListViewState extends State<StaffListView> {
 
   void _showEditStaffDialog(Map<String, dynamic> staff) {
     final nameController = TextEditingController(text: staff['name'] ?? '');
-    final emailController = TextEditingController(text: staff['email'] ?? '');
     String? selectedRole = staff['role'];
     List<String> selectedPermissions = List<String>.from(staff['permissions'] ?? []);
 

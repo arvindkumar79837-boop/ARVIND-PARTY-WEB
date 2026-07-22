@@ -37,19 +37,6 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView> {
     setState(() => _isLoading = false);
   }
 
-  Future<void> _loadDealerTransactions(String dealerUid) async {
-    setState(() => _isLoading = true);
-    try {
-      final response = await _apiService.get('/dealer/transactions/$dealerUid');
-      if (response['success'] == true) {
-        _transactions = List<Map<String, dynamic>>.from(response['data']['transactions'] ?? []);
-      }
-    } catch (e) {
-      debugPrint('Error loading dealer transactions: $e');
-    }
-    setState(() => _isLoading = false);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

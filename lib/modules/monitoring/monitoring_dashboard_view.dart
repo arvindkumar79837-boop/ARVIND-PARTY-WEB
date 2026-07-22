@@ -31,11 +31,9 @@ class _MonitoringDashboardViewState extends State<MonitoringDashboardView> {
 
     try {
       final healthResponse = await _apiService.get('/health/detailed');
-      final metricsResponse = await _apiService.get('/health/metrics');
 
       setState(() {
         _healthData = healthResponse['data'];
-        _metricsData = metricsResponse['data'];
         _isLoading = false;
       });
     } catch (e) {

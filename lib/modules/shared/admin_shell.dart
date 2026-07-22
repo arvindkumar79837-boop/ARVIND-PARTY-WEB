@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../core/constants/auth_controller.dart';
 import '../../core/services/role_permission_service.dart';
 import '../../core/theme/web_theme.dart';
-import '../../routes/app_routes.dart';
 
 class AdminShell extends StatelessWidget {
   final Widget child;

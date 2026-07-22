@@ -30,7 +30,6 @@ class _ContentReportsViewState extends State<ContentReportsView> {
       final res = await _apiService.get('/moderation/reports', queryParams: params);
       if (res['success'] == true) {
         _reports = List.from(res['data'] ?? []);
-        _total = res['pagination']?['total'] ?? 0;
       }
     } catch (e) {
       Get.snackbar('Error', e.toString());

@@ -495,7 +495,6 @@ class _VipAdminViewState extends State<VipAdminView> with SingleTickerProviderSt
 
   Widget _buildSviUserCard(Map<String, dynamic> svip) {
     final user = svip['user_details'] ?? {};
-    final config = svip['svip_config'] ?? {};
 
     return Card(
       color: Colors.grey.shade900,
@@ -549,7 +548,7 @@ class _VipAdminViewState extends State<VipAdminView> with SingleTickerProviderSt
         final data = snapshot.data!;
         if (data['success'] != true) return _buildEmptyState('Failed to load cosmetics');
 
-        final items = (data['data'] as List) ?? [];
+        final items = (data['data'] as List);
         return ListView.builder(
           padding: const EdgeInsets.all(12),
           itemCount: items.length,

@@ -171,7 +171,7 @@ class AdminSidebarWidget extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.savings,
                     title: "Gift Economy",
-                    show: authController.isOwner.value,
+                    show: authController.isOwner,
                     onTap: () => Get.toNamed(AppRoutes.giftEconomySettings),
                   ),
 
@@ -185,21 +185,21 @@ class AdminSidebarWidget extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.report,
                     title: "Content Reports",
-                    show: authController.hasPermission('SECURITY_DASHBOARD') || authController.isOwner.value,
+                    show: authController.hasPermission('SECURITY_DASHBOARD') || authController.isOwner,
                     onTap: () => Get.toNamed(AppRoutes.contentReports),
                   ),
 
                   _buildMenuItem(
                     icon: Icons.gavel,
                     title: "Legal Documents",
-                    show: authController.isOwner.value,
+                    show: authController.isOwner,
                     onTap: () => Get.toNamed(AppRoutes.legalDocuments),
                   ),
 
                   _buildMenuItem(
                     icon: Icons.support_agent,
                     title: "Support Tickets",
-                    show: authController.hasPermission('SECURITY_DASHBOARD') || authController.isOwner.value,
+                    show: authController.hasPermission('SECURITY_DASHBOARD') || authController.isOwner,
                     onTap: () => Get.toNamed(AppRoutes.supportTickets),
                   ),
 
@@ -209,42 +209,42 @@ class AdminSidebarWidget extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.star,
                     title: "Subscription Tiers",
-                    show: authController.isOwner.value,
+                    show: authController.isOwner,
                     onTap: () => Get.toNamed(AppRoutes.subscriptionTiers),
                   ),
 
                   _buildMenuItem(
                     icon: Icons.settings,
                     title: "System Settings",
-                    show: authController.isOwner.value,
+                    show: authController.isOwner,
                     onTap: () => Get.toNamed(AppRoutes.systemSettings),
                   ),
 
                   _buildMenuItem(
                     icon: Icons.library_music,
                     title: "Music Library",
-                    show: authController.isOwner.value,
+                    show: authController.isOwner,
                     onTap: () => Get.toNamed(AppRoutes.musicLibrary),
                   ),
 
                   _buildMenuItem(
                     icon: Icons.topic,
                     title: "Room Topics",
-                    show: authController.isOwner.value,
+                    show: authController.isOwner,
                     onTap: () => Get.toNamed(AppRoutes.roomTopics),
                   ),
 
                   _buildMenuItem(
                     icon: Icons.feed,
                     title: "Feed Moderation",
-                    show: authController.hasPermission('SECURITY_DASHBOARD') || authController.isOwner.value,
+                    show: authController.hasPermission('SECURITY_DASHBOARD') || authController.isOwner,
                     onTap: () => Get.toNamed(AppRoutes.feedModeration),
                   ),
 
                   _buildMenuItem(
                     icon: Icons.analytics,
                     title: "Revenue Dashboard",
-                    show: authController.isOwner.value,
+                    show: authController.isOwner,
                     onTap: () => Get.toNamed(AppRoutes.revenueDashboard),
                   ),
 
