@@ -6,6 +6,8 @@ import '../modules/family_management/family_management_view.dart';
 import '../modules/security/security_dashboard_view.dart';
 import '../modules/security/security_binding.dart';
 import '../modules/events/event_management_view.dart';
+import '../modules/events/views/event_management_dashboard_view.dart';
+import '../modules/events/bindings/event_binding.dart';
 import '../modules/events/lucky_draw_management_view.dart';
 import '../modules/events/daily_task_management_view.dart';
 import '../modules/events/invite_management_view.dart';
@@ -144,6 +146,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.events,
       page: () => const EventManagementView(),
+      middlewares: [AuthGuard()],
+    ),
+    GetPage(
+      name: AppRoutes.eventDashboard,
+      page: () => const EventManagementDashboardView(),
+      binding: EventBinding(),
       middlewares: [AuthGuard()],
     ),
     GetPage(

@@ -17,6 +17,7 @@ class AppRoutes {
   static const String myProfile = '/my-profile';
   static const String staff = '/staff';
   static const String events = '/events';
+  static const String eventDashboard = '/events/dashboard';
   static const String tournaments = '/tournaments';
   static const String championships = '/championships';
   static const String treasureHunts = '/treasure-hunts';

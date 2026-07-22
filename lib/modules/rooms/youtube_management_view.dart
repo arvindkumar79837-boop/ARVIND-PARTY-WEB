@@ -1,6 +1,8 @@
 // ═══════════════════════════════════════════════════════════════════════════
 // FILE: arvind_party_web/lib/modules/rooms/youtube_management_view.dart
 // ARVIND PARTY - Web Admin Panel: YouTube Management
+// TODO: YouTubeManagementController is unused — no route, no Get.find, no import
+//       from outside this file. Wire to a view and route when ready, or remove.
 // ═══════════════════════════════════════════════════════════════════════════
 
 import 'package:flutter/material.dart';

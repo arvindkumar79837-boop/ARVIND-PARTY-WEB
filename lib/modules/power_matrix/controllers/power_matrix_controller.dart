@@ -1,6 +1,8 @@
 // ═══════════════════════════════════════════════════════════════════════════
 // FILE: arvind_party_web/lib/modules/power_matrix/controllers/power_matrix_controller.dart
 // ARVIND PARTY - POWER MATRIX CONTROLLER (Web Panel)
+// TODO: This controller is unused — no route, no Get.find, no external import.
+//       Wire to a view and route when Power Matrix feature is ready, or remove.
 // ═══════════════════════════════════════════════════════════════════════════
 
 import 'package:flutter/material.dart';
