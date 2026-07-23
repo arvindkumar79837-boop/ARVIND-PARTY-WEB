@@ -63,7 +63,7 @@ class _AgencyTargetViewState extends State<AgencyTargetView> {
                 ),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
-                  initialValue: selectedMetric,
+                  value: selectedMetric,
                   decoration: const InputDecoration(labelText: 'Target Metric', border: OutlineInputBorder()),
                   items: const [
                     DropdownMenuItem<String>(value: 'COINS_SPENT', child: Text('Coins Spent')),
@@ -83,7 +83,7 @@ class _AgencyTargetViewState extends State<AgencyTargetView> {
                 ),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
-                  initialValue: selectedDuration,
+                  value: selectedDuration,
                   decoration: const InputDecoration(labelText: 'Duration', border: OutlineInputBorder()),
                   items: const [
                     DropdownMenuItem<String>(value: 'WEEKLY', child: Text('1 Week (7 days)')),

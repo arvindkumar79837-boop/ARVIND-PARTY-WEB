@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../core/services/api_service.dart';
 
 class InfrastructureController extends GetxController {
-  final ApiService _apiService = Get.put(ApiService());
+  final ApiService _apiService = Get.find<ApiService>();
 
   // Overall status
   final overallStatus = 'Loading...'.obs;

@@ -206,7 +206,7 @@ class _RewardConfigAdminViewState extends State<RewardConfigAdminView> {
                       ),
                       const SizedBox(height: 12),
                       DropdownButtonFormField<String>(
-                        initialValue: _selectedGameType,
+                        value: _selectedGameType,
                         decoration: const InputDecoration(
                           labelText: 'Game Type',
                           border: OutlineInputBorder(),
@@ -504,7 +504,7 @@ class _RewardConfigAdminViewState extends State<RewardConfigAdminView> {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
-                initialValue: 'lucky_spin',
+                value: 'lucky_spin',
                 decoration: const InputDecoration(
                   labelText: 'Game Type',
                   border: OutlineInputBorder(),

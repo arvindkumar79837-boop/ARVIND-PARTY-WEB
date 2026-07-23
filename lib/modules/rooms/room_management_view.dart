@@ -397,7 +397,7 @@ class _RoomManagementViewState extends State<RoomManagementView> {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
-                initialValue: selectedType,
+                value: selectedType,
                 decoration: const InputDecoration(
                   labelText: 'Room Type',
                   border: OutlineInputBorder(),
@@ -416,7 +416,7 @@ class _RoomManagementViewState extends State<RoomManagementView> {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
-                initialValue: selectedCategory,
+                value: selectedCategory,
                 decoration: const InputDecoration(
                   labelText: 'Category',
                   border: OutlineInputBorder(),

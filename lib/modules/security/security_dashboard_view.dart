@@ -222,7 +222,7 @@ class _FraudAlertsTab extends StatelessWidget {
             children: [
               Expanded(
                 child: Obx(() => DropdownButtonFormField<String>(
-                  initialValue: ctrl.fraudAlerts.isEmpty ? null : 'ALL',
+                  value: ctrl.fraudAlerts.isEmpty ? null : 'ALL',
                   items: const [
                     DropdownMenuItem(value: 'ALL', child: Text('All Severity')),
                     DropdownMenuItem(value: 'CRITICAL', child: Text('CRITICAL')),
@@ -443,7 +443,7 @@ class _AuditLogsTab extends StatelessWidget {
             children: [
               Expanded(
                 child: Obx(() => DropdownButtonFormField<String>(
-                  initialValue: 'ALL',
+                  value: 'ALL',
                   items: const [
                     DropdownMenuItem(value: 'ALL', child: Text('All Actions')),
                     DropdownMenuItem(value: 'LOGIN', child: Text('LOGIN')),

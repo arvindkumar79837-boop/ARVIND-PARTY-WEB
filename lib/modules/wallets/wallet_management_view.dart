@@ -492,7 +492,7 @@ class _WalletManagementViewState extends State<WalletManagementView> with Single
             children: [
               Expanded(
                 child: DropdownButtonFormField<String>(
-                  initialValue: selectedWithdrawalStatus.value.isEmpty ? null : selectedWithdrawalStatus.value,
+                  value: selectedWithdrawalStatus.value.isEmpty ? null : selectedWithdrawalStatus.value,
                   decoration: const InputDecoration(labelText: 'Filter by Status', border: OutlineInputBorder()),
                   items: const [
                     DropdownMenuItem(value: '', child: Text('All')),
@@ -557,7 +557,7 @@ class _WalletManagementViewState extends State<WalletManagementView> with Single
             children: [
               Expanded(
                 child: DropdownButtonFormField<String>(
-                  initialValue: selectedTransactionType.value.isEmpty ? null : selectedTransactionType.value,
+                  value: selectedTransactionType.value.isEmpty ? null : selectedTransactionType.value,
                   decoration: const InputDecoration(labelText: 'Filter by Wallet', border: OutlineInputBorder()),
                   items: const [
                     DropdownMenuItem(value: '', child: Text('All Wallets')),
@@ -683,7 +683,7 @@ class _WalletManagementViewState extends State<WalletManagementView> with Single
         const SizedBox(height: 12),
 
         Obx(() => DropdownButtonFormField<String>(
-          initialValue: freezeWalletType.value,
+          value: freezeWalletType.value,
           decoration: const InputDecoration(labelText: 'Wallet Type', border: OutlineInputBorder()),
           items: const [
             DropdownMenuItem(value: 'coin', child: Text('Coin Wallet')),
@@ -821,7 +821,7 @@ class _WalletManagementViewState extends State<WalletManagementView> with Single
           const SizedBox(height: 12),
 
           Obx(() => DropdownButtonFormField<String>(
-            initialValue: adjustmentWalletType.value,
+            value: adjustmentWalletType.value,
             decoration: const InputDecoration(labelText: 'Target Wallet', border: OutlineInputBorder()),
             items: const [
               DropdownMenuItem(value: 'coin', child: Text('Coin Wallet')),

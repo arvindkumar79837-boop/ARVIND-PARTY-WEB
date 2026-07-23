@@ -11,7 +11,7 @@ class MonitoringDashboardView extends StatefulWidget {
 }
 
 class _MonitoringDashboardViewState extends State<MonitoringDashboardView> {
-  final ApiService _apiService = Get.put(ApiService());
+  final ApiService _apiService = Get.find<ApiService>();
   bool _isLoading = true;
   Map<String, dynamic>? _healthData;
   String? _error;

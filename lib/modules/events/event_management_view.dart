@@ -162,7 +162,7 @@ class _EventManagementViewState extends State<EventManagementView> {
                   TextField(controller: _descriptionController, decoration: const InputDecoration(labelText: 'Description', border: OutlineInputBorder()), maxLines: 2),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
-                    initialValue: _selectedType,
+                    value: _selectedType,
                     decoration: const InputDecoration(labelText: 'Event Type', border: OutlineInputBorder()),
                     items: _eventTypes.map((t) => DropdownMenuItem(value: t['value'], child: Text(t['label']!))).toList(),
                     onChanged: (v) => setState(() => _selectedType = v ?? 'DAILY_TASK'),
@@ -179,7 +179,7 @@ class _EventManagementViewState extends State<EventManagementView> {
                   ),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
-                    initialValue: _selectedRecurrence,
+                    value: _selectedRecurrence,
                     decoration: const InputDecoration(labelText: 'Recurrence', border: OutlineInputBorder()),
                     items: const [
                       DropdownMenuItem(value: 'none', child: Text('No Repeat')),

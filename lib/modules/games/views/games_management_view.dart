@@ -40,7 +40,7 @@ class GamesManagementView extends GetView<GameController> {
           Expanded(
             child: Obx(() {
               return DropdownButtonFormField<String>(
-                initialValue: controller.selectedGameType.value,
+                value: controller.selectedGameType.value,
                 decoration: InputDecoration(
                   labelText: 'Game Type',
                   labelStyle: const TextStyle(color: Colors.grey),
@@ -221,7 +221,7 @@ class GamesManagementView extends GetView<GameController> {
                 _buildTextField(descController, 'Description', 'Enter description', maxLines: 3),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
-                  initialValue: selectedType,
+                  value: selectedType,
                   decoration: InputDecoration(
                     labelText: 'Game Type',
                     labelStyle: const TextStyle(color: Colors.grey),
@@ -244,7 +244,7 @@ class GamesManagementView extends GetView<GameController> {
                 ),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
-                  initialValue: selectedReward,
+                  value: selectedReward,
                   decoration: InputDecoration(
                     labelText: 'Reward Type',
                     labelStyle: const TextStyle(color: Colors.grey),
@@ -351,7 +351,7 @@ class GamesManagementView extends GetView<GameController> {
                 _buildTextField(descController, 'Description', 'Enter description', maxLines: 3),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
-                  initialValue: selectedType,
+                  value: selectedType,
                   decoration: InputDecoration(
                     labelText: 'Game Type',
                     labelStyle: const TextStyle(color: Colors.grey),
@@ -374,7 +374,7 @@ class GamesManagementView extends GetView<GameController> {
                 ),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
-                  initialValue: selectedReward,
+                  value: selectedReward,
                   decoration: InputDecoration(
                     labelText: 'Reward Type',
                     labelStyle: const TextStyle(color: Colors.grey),
