@@ -9,8 +9,23 @@ class SocketService extends GetxService {
   final _box = GetStorage();
   final RxBool isConnected = false.obs;
 
+  // Reactive observables for real-time admin data
+  final RxMap<String, dynamic> liveStats = <String, dynamic>{}.obs;
+  final RxList<Map<String, dynamic>> recentUserUpdates = <Map<String, dynamic>>[].obs;
+  final RxList<Map<String, dynamic>> recentRoomUpdates = <Map<String, dynamic>>[].obs;
+  final Rxn<Map<String, dynamic>> pendingWithdrawalRequest = Rxn<Map<String, dynamic>>();
+  final RxInt withdrawalNotificationCount = 0.obs;
+
   SocketService() {
     _initSocket();
+  }
+
+  void updateToken(String newToken) {
+    _socket.io.options?['auth'] = <String, dynamic>{'token': newToken};
+    if (_socket.connected) {
+      _socket.disconnect();
+      _socket.connect();
+    }
   }
 
   void refreshToken() {
@@ -39,25 +54,46 @@ class SocketService extends GetxService {
 
     _socket.onConnect((_) {
       isConnected.value = true;
-      debugPrint('Socket connected: ${_socket.id}');
+      final refreshedToken = _box.read('admin_token') ?? '';
+      _socket.emit('auth', {'token': refreshedToken});
     });
 
     _socket.onDisconnect((_) {
       isConnected.value = false;
-      debugPrint('Socket disconnected');
     });
 
     _socket.onConnectError((data) {
       isConnected.value = false;
-      debugPrint('Socket connection error: $data');
+    });
+
+    _socket.on('reconnect', (_) {
+      final token = _box.read('admin_token') ?? '';
+      _socket.emit('auth', {'token': token});
     });
 
     _socket.on('admin:stats', (data) {
-      debugPrint('Live stats update: $data');
+      if (data is Map) liveStats.value = Map<String, dynamic>.from(data);
     });
 
     _socket.on('admin:user_update', (data) {
-      debugPrint('User update: $data');
+      if (data is Map) {
+        recentUserUpdates.insert(0, Map<String, dynamic>.from(data));
+        if (recentUserUpdates.length > 50) recentUserUpdates.removeLast();
+      }
+    });
+
+    _socket.on('admin:room_update', (data) {
+      if (data is Map) {
+        recentRoomUpdates.insert(0, Map<String, dynamic>.from(data));
+        if (recentRoomUpdates.length > 50) recentRoomUpdates.removeLast();
+      }
+    });
+
+    _socket.on('admin:withdrawal_request', (data) {
+      if (data is Map) {
+        pendingWithdrawalRequest.value = Map<String, dynamic>.from(data);
+        withdrawalNotificationCount.value++;
+      }
     });
   }
 
@@ -87,6 +123,11 @@ class SocketService extends GetxService {
 
   void joinRoom(String roomName) {
     _socket.emit('join:admin_room', {'room': roomName});
+  }
+
+  void clearWithdrawalNotification() {
+    withdrawalNotificationCount.value = 0;
+    pendingWithdrawalRequest.value = null;
   }
 
   @override

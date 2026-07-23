@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -5,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:google_sign_in/google_sign_in.dart';
 import '../services/api_service.dart';
 import '../services/role_permission_service.dart';
+import '../services/socket_service.dart';
 import '../../modules/auth/controllers/role_auth_controller.dart';
 import '../../modules/auth/models/role_permission_model.dart';
 import '../../routes/app_routes.dart';
@@ -22,6 +25,24 @@ class AuthController extends GetxController {
   var staffName = ''.obs;
   var isOwner = false.obs;
 
+  Timer? _inactivityTimer;
+  static const _sessionTimeout = Duration(hours: 8);
+
+  /// Reset inactivity timer on any user interaction
+  void resetInactivityTimer() {
+    _inactivityTimer?.cancel();
+    _inactivityTimer = Timer(_sessionTimeout, () {
+      Get.snackbar(
+        'Session Expired',
+        'You have been logged out due to inactivity.',
+        backgroundColor: Colors.orange,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 5),
+      );
+      logout();
+    });
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -38,6 +59,7 @@ class AuthController extends GetxController {
       staffName.value = _storage.read('admin_staff_name') ?? '';
       isOwner.value = _storage.read('admin_is_owner') ?? false;
       _syncPermissionsFromStorage();
+      resetInactivityTimer();
     }
   }
 
@@ -92,6 +114,7 @@ class AuthController extends GetxController {
 
         _saveSession(token, staff, staffIsOwner);
         _syncPermissions(response);
+        resetInactivityTimer();
         return true;
       } else {
         errorMessage.value = response['message'] ?? 'Login failed';
@@ -143,6 +166,7 @@ class AuthController extends GetxController {
 
         _saveSession(token, staff, staffIsOwner);
         _syncPermissions(response);
+        resetInactivityTimer();
         return true;
       } else {
         errorMessage.value = response['message'] ?? 'Not authorized as admin/owner';
@@ -173,6 +197,9 @@ class AuthController extends GetxController {
 
     try {
       Get.find<ApiService>().token = token;
+    } catch (e) { debugPrint('Error: $e'); }
+    try {
+      Get.find<SocketService>().updateToken(token);
     } catch (e) { debugPrint('Error: $e'); }
 
     isLoggedIn.value = true;

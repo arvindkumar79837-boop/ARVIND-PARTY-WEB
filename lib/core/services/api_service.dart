@@ -3,12 +3,12 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'role_permission_service.dart';
+import '../constants/auth_controller.dart';
 import '../constants/env_config.dart';
 import '../../routes/app_routes.dart';
 
@@ -18,7 +18,6 @@ class ApiService extends GetxService {
   late final Dio _dio;
 
   /// Expose Dio instance for modules that need direct Dio access
-  /// (e.g. music_library, room_topics, feed_moderation, etc.)
   Dio get dio => _dio;
 
   ApiService({String? baseUrl}) : _baseUrl = baseUrl ?? EnvConfig.apiBaseUrl {
@@ -33,6 +32,11 @@ class ApiService extends GetxService {
         final t = token;
         if (t != null) {
           options.headers['Authorization'] = 'Bearer $t';
+        }
+        final authController = _getAuthController();
+        if (authController != null) {
+          options.headers['X-Staff-Role'] = authController.role.value;
+          options.headers['X-Staff-Id'] = authController.staffId.value;
         }
         handler.next(options);
       },
@@ -56,86 +60,69 @@ class ApiService extends GetxService {
     }
   }
 
-  Map<String, String> get _headers => {
-        'Content-Type': 'application/json',
-        if (token != null) 'Authorization': 'Bearer $token',
-      };
-
-  Map<String, dynamic> _parseResponse(http.Response response) {
-    try {
-      return jsonDecode(response.body) as Map<String, dynamic>;
-    } catch (e) {
-      debugPrint('ApiService._parseResponse error: $e');
-      return {'success': false, 'message': 'Invalid response format'};
+  Map<String, dynamic> _handleDioError(DioException e) {
+    final statusCode = e.response?.statusCode;
+    final message = e.response?.data?['message']?.toString() ?? 'Network error';
+    if (statusCode == 401) {
+      token = null;
+      try { Get.find<RolePermissionService>().logout(); } catch (_) {}
+      Get.offAllNamed(AppRoutes.login);
     }
+    return {'success': false, 'message': message};
   }
 
   Future<Map<String, dynamic>> get(String endpoint, {Map<String, dynamic>? queryParams, Map<String, dynamic>? query}) async {
     try {
       final params = queryParams ?? query;
-      final uri = Uri.parse('$_baseUrl$endpoint').replace(queryParameters: params);
-      final response = await http.get(uri, headers: _headers).timeout(const Duration(seconds: 30));
-      _checkAuth(response);
-      return _parseResponse(response);
-    } catch (e) {
+      final response = await _dio.get(endpoint, queryParameters: params);
+      return response.data as Map<String, dynamic>;
+    } on DioException catch (e) {
       debugPrint('ApiService.get error: $e');
-      return {'success': false, 'message': 'Network error: $e'};
+      return _handleDioError(e);
     }
   }
 
   Future<Map<String, dynamic>> post(String endpoint, Map<String, dynamic> body) async {
     try {
-      final uri = Uri.parse('$_baseUrl$endpoint');
-      final response = await http.post(uri, headers: _headers, body: jsonEncode(body)).timeout(const Duration(seconds: 30));
-      _checkAuth(response);
-      return _parseResponse(response);
-    } catch (e) {
+      final response = await _dio.post(endpoint, data: body);
+      return response.data as Map<String, dynamic>;
+    } on DioException catch (e) {
       debugPrint('ApiService.post error: $e');
-      return {'success': false, 'message': 'Network error: $e'};
+      return _handleDioError(e);
     }
   }
 
   Future<Map<String, dynamic>> put(String endpoint, [Map<String, dynamic>? body]) async {
     try {
-      final uri = Uri.parse('$_baseUrl$endpoint');
-      final response = await http.put(uri, headers: _headers, body: jsonEncode(body ?? {})).timeout(const Duration(seconds: 30));
-      _checkAuth(response);
-      return _parseResponse(response);
-    } catch (e) {
+      final response = await _dio.put(endpoint, data: body ?? {});
+      return response.data as Map<String, dynamic>;
+    } on DioException catch (e) {
       debugPrint('ApiService.put error: $e');
-      return {'success': false, 'message': 'Network error: $e'};
+      return _handleDioError(e);
     }
   }
 
   Future<Map<String, dynamic>> patch(String endpoint, [Map<String, dynamic>? body]) async {
     try {
-      final uri = Uri.parse('$_baseUrl$endpoint');
-      final response = await http.patch(uri, headers: _headers, body: jsonEncode(body ?? {})).timeout(const Duration(seconds: 30));
-      _checkAuth(response);
-      return _parseResponse(response);
-    } catch (e) {
+      final response = await _dio.patch(endpoint, data: body ?? {});
+      return response.data as Map<String, dynamic>;
+    } on DioException catch (e) {
       debugPrint('ApiService.patch error: $e');
-      return {'success': false, 'message': 'Network error: $e'};
+      return _handleDioError(e);
     }
   }
 
   Future<Map<String, dynamic>> delete(String endpoint) async {
     try {
-      final uri = Uri.parse('$_baseUrl$endpoint');
-      final response = await http.delete(uri, headers: _headers).timeout(const Duration(seconds: 30));
-      _checkAuth(response);
-      return _parseResponse(response);
-    } catch (e) {
+      final response = await _dio.delete(endpoint);
+      return response.data as Map<String, dynamic>;
+    } on DioException catch (e) {
       debugPrint('ApiService.delete error: $e');
-      return {'success': false, 'message': 'Network error: $e'};
+      return _handleDioError(e);
     }
   }
 
-  void _checkAuth(http.Response response) {
-    if (response.statusCode == 401) {
-      token = null;
-      Get.find<RolePermissionService>().logout();
-      Get.offAllNamed(AppRoutes.login);
-    }
+  AuthController? _getAuthController() {
+    try { return Get.find<AuthController>(); } catch (_) { return null; }
   }
 }

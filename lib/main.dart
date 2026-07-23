@@ -37,6 +37,38 @@ class AdminApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ErrorWidget.builder = (FlutterErrorDetails details) {
+      return Scaffold(
+        backgroundColor: const Color(0xFF1A1A2E),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error_outline, size: 64, color: Color(0xFFFF6B6B)),
+              const SizedBox(height: 16),
+              Text(
+                'Something went wrong',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.white),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                details.exception.toString().length > 100
+                    ? '${details.exception.toString().substring(0, 100)}...'
+                    : details.exception.toString(),
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton.icon(
+                onPressed: () => Get.offAllNamed(AppRoutes.dashboard),
+                icon: const Icon(Icons.dashboard),
+                label: const Text('Go to Dashboard'),
+              ),
+            ],
+          ),
+        ),
+      );
+    };
     return GetMaterialApp(
       title: 'Arvind Party Admin Panel',
       debugShowCheckedModeBanner: false,
