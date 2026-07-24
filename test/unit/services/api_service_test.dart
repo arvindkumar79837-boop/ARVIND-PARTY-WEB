@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:arvind_party_web/core/services/api_service.dart';
-import 'package:arvind_party_web/core/constants/env_config.dart';
 
 void main() {
   group('ApiService', () {

@@ -35,6 +35,16 @@ class SocketService extends GetxService {
     }
   }
 
+  /// Rebuild socket with latest token and reconnect
+  void reconnectWithToken() {
+    final token = _box.read('admin_token') ?? '';
+    _socket.dispose();
+    _initSocket();
+    if (token.isNotEmpty) {
+      _socket.connect();
+    }
+  }
+
   void _initSocket() {
     final token = _box.read('admin_token') ?? '';
 
@@ -134,6 +144,7 @@ class SocketService extends GetxService {
   void onClose() {
     _socket.disconnect();
     _socket.clearListeners();
+    _socket.dispose();
     super.onClose();
   }
 }
